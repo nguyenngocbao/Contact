@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.safetrust.interview</groupId>
 	<artifactId>contact</artifactId>
 	<version>0.0.1</version>
 	<name>contact</name>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.9.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 	<properties>
 		<package.version>${product.version}_${build.number}</package.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,8 +32,9 @@
 		<!-- JUnit -->
 		<junit.version>4.13</junit.version>
 		<h2.version>1.4.200</h2.version>
-                 <!--lombok-->
- 		<lombok.version>1.18.8</lombok.version>
+		<!--lombok -->
+		<lombok.version>1.18.8</lombok.version>
+		<swagger.version>2.9.2</swagger.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -59,28 +55,33 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 			<version>${spring.boot.version}</version>
 			<exclusions>
-			 <exclusion>
-      				<groupId>org.springframework.boot</groupId>
-    				  <artifactId>spring-boot-starter-logging</artifactId>
-    			</exclusion>
-    			</exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<version>2.0.4.RELEASE</version>
+			<version>${spring.boot.version}</version>
 		</dependency>
-		 <!-- Spring data jpa -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<!-- Spring data jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>${spring.boot.version}</version>
 			<exclusions>
-			 <exclusion>
-      				<groupId>org.springframework.boot</groupId>
-    				  <artifactId>spring-boot-starter-logging</artifactId>
-    		</exclusion>
-    		</exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- log4j -->
@@ -119,13 +120,13 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
+			<version>${swagger.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<version>${swagger.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -175,7 +176,7 @@
 			<version>${h2.version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<defaultGoal>spring-boot:run</defaultGoal>
 		<plugins>
@@ -282,14 +283,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot.maven.plugin.version}</version>
-				 <!-- for debug mode -->
-				<!-- <configuration>
-					 <executable>true</executable>
-					 <fork>true</fork>
-					  <jvmArguments>
-						 -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8999
-					  </jvmArguments>
-		        </configuration>-->
+				<!-- for debug mode -->
+				<!-- <configuration> <executable>true</executable> <fork>true</fork> 
+					<jvmArguments> -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8999 
+					</jvmArguments> </configuration> -->
 			</plugin>
 		</plugins>
 	</build>
