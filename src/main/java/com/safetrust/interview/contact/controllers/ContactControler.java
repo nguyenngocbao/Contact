@@ -44,6 +44,38 @@ public class ContactControler {
     }
     
     /**
+     * GET /contact/:id : Get the "id" contact.
+     *
+     * @param id:
+     *            the id of the contactDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the contactDTO, or with status 404 (Not Found)
+     * @throws ApplicationException 
+     */
+    @ApiOperation( value = "Get the contact with id", response = ResponseEntity.class )
+    @GetMapping("/{id}")
+    public ResponseEntity<ContactDTO> getContact(@PathVariable Long id) throws ApplicationException{
+        logger.debug("REST request to get contact : {}", id);
+        
+        ContactDTO contactDTO = contactService.findContactById(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(contactDTO));
+    }
+    
+    /**
+     * GET /contact : Get all the contacts.
+     *
+     * @param pageable
+     *            the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of contact in body
+     */
+    @ApiOperation( value = "Get all the contacts", response = ResponseEntity.class )
+    @GetMapping
+    public ResponseEntity<Page<ContactDTO>> getAllContacts(Pageable pageable) throws ApplicationException {
+        logger.debug("REST request to get a page of contacts");
+        Page<ContactDTO> page = contactService.findAllContact(pageable);
+        return new ResponseEntity<>(page, null , HttpStatus.OK);
+    }
+    
+    /**
      * POST /contact: Create contact
      * 
      * @param :
@@ -68,44 +100,13 @@ public class ContactControler {
      * @throws URISyntaxException
      */
     @ApiOperation( value = "Updates an existing contact", response = ResponseEntity.class )
-    @PutMapping
-    public ResponseEntity<ContactDTO> updateContact( @RequestBody ContactDTO contactDTO ) throws URISyntaxException {
+    @PutMapping( "/{id}" )
+    public ResponseEntity<ContactDTO> updateContact(@PathVariable Long id, @RequestBody ContactDTO contactDTO ) throws URISyntaxException {
 
-        ContactDTO result = contactService.createOrUpdateContact(contactDTO.getId(), contactDTO);
-        return ResponseEntity.created(new URI(CONTACT_MAPPING + "/" + result.getId())).body(result);
+        ContactDTO result = contactService.createOrUpdateContact(id, contactDTO);
+        return ResponseEntity.created(new URI(CONTACT_MAPPING + "/" + id)).body(result);
     }
     
-    /**
-     * GET /contact/:id : Get the "id" contact.
-     *
-     * @param id:
-     *            the id of the contactDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the contactDTO, or with status 404 (Not Found)
-     * @throws ApplicationException 
-     */
-    @ApiOperation( value = "Get the contact with id", response = ResponseEntity.class )
-    @GetMapping("/{id}")
-    public ResponseEntity<ContactDTO> getContact(@PathVariable Long id) throws ApplicationException{
-        logger.debug("REST request to get contact : {}", id);
-        
-        ContactDTO contactDTO = contactService.findContactById(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(contactDTO));
-    }
-    
-    /**
-     * GET /items : Get all the contacts.
-     *
-     * @param pageable
-     *            the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of contact in body
-     */
-    @ApiOperation( value = "Get all the contacts", response = ResponseEntity.class )
-    @GetMapping
-    public ResponseEntity<Page<ContactDTO>> getAllContacts(Pageable pageable) throws ApplicationException {
-        logger.debug("REST request to get a page of contacts");
-        Page<ContactDTO> page = contactService.findAllContact(pageable);
-        return new ResponseEntity<>(page, null , HttpStatus.OK);
-    }
     
     /**
      * DELETE /contact/:id : Delete the "id" contact.
