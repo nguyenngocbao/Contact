@@ -14,7 +14,7 @@ import com.safetrust.interview.contact.models.Contact;
 public interface ContactRepository extends JpaRepository<Contact, Long>  {
     
     @Modifying
-    @Query("DELETE FROM contact WHERE id in :ids")
+    @Query("DELETE FROM Contact WHERE id in :ids")
     void deleteAllContactWithIds(@Param("ids") Collection<Long> ids);
 
 }

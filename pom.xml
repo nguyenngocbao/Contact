@@ -24,11 +24,9 @@
 		<spring.boot.maven.plugin.version>2.3.9.RELEASE</spring.boot.maven.plugin.version>
 		<mysql.version>5.1.38</mysql.version>
 		<cobertura.version>2.7</cobertura.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<mapstruct.version>1.3.0.Final</mapstruct.version>
 		<hibernate.version>5.2.8.Final</hibernate.version>
 		<maven.apache.version>3.0.2</maven.apache.version>
-		<log4j.version>2.14.1</log4j.version>
-		<sf4j.version>1.7.30</sf4j.version>
 		<!-- JUnit -->
 		<junit.version>4.13</junit.version>
 		<h2.version>1.4.200</h2.version>
@@ -83,39 +81,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-		<!-- log4j -->
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<version>${spring.boot.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-jcl</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${sf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${sf4j.version}</version>
-		</dependency>
-
 		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>
