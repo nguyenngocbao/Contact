@@ -104,7 +104,7 @@ public class ContactControler {
     public ResponseEntity<ContactDTO> updateContact(@PathVariable Long id, @RequestBody ContactDTO contactDTO ) throws URISyntaxException {
 
         ContactDTO result = contactService.createOrUpdateContact(id, contactDTO);
-        return ResponseEntity.created(new URI(CONTACT_MAPPING + "/" + id)).body(result);
+        return ResponseEntity.ok().body(result);
     }
     
     
