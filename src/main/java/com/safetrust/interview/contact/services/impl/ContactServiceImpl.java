@@ -1,6 +1,7 @@
 package com.safetrust.interview.contact.services.impl;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +21,14 @@ import com.safetrust.interview.contact.services.ContactService;
 @Transactional
 public class ContactServiceImpl implements ContactService{
     
-    @Autowired
     private ContactRepository contactRepo;
     
-    @Autowired
     private ContactMapper contactMapper;
+    
+    public ContactServiceImpl(ContactRepository contactRepo,ContactMapper contactMapper) {
+        this.contactRepo = contactRepo;
+        this.contactMapper = contactMapper;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -42,7 +46,7 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public ContactDTO createOrUpdateContact(Long id, ContactDTO contactDTO) {
         Contact contact = contactMapper.toEntity(contactDTO);
-        if ( id != null && contactRepo.findById( id ).isPresent() ) {
+        if ( Objects.nonNull(id) && contactRepo.findById( id ).isPresent() ) {
             contact.setId( id );
         } else {
             contact.setId( 0 ); // Set 0 here because we use DTO as creation request also. It is better to create requestVM type or use Json ignore here.
