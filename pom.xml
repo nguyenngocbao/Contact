@@ -222,7 +222,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>ampos.restaurant.RestaurantApplication</mainClass>
+							<mainClass>com.safetrust.interview.contact.ContactApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

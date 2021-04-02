@@ -10,9 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import com.safetrust.interview.contact.models.Contact;
 
+/**
+ * 
+ * repository to manage contact
+ *
+ */
 @Repository
-public interface ContactRepository extends JpaRepository<Contact, Long>  {
-    
+public interface ContactRepository extends JpaRepository<Contact, Long> {
+
     @Modifying
     @Query("DELETE FROM Contact WHERE id in :ids")
     void deleteAllContactWithIds(@Param("ids") Collection<Long> ids);
