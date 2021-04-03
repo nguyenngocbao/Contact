@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException.BadRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.safetrust.interview.contact.exception.ApplicationException;
 import com.safetrust.interview.contact.models.Contact;
@@ -54,7 +56,8 @@ public class ContactServiceImpl implements ContactService {
     @Override
     @Transactional(readOnly = true)
     public ContactDTO findContactById(Long id) throws ApplicationException {
-        Contact contact = contactRepo.findById(id).orElseThrow(() -> new ApplicationException(""));
+        Contact contact = contactRepo.findById(id).orElseThrow(() 
+                -> new ApplicationException(String.format("Contact with ID [%s] not found", id)));
         return contactMapper.toDto(contact);
     }
 
@@ -71,8 +74,7 @@ public class ContactServiceImpl implements ContactService {
         if (Objects.nonNull(id) && contactRepo.findById(id).isPresent()) {
             contact.setId(id);
         } else {
-            contact.setId(0); // Set 0 here because we use DTO as creation request also. It is better to
-                              // create requestVM type or use Json ignore here.
+            contact.setId((Long)null);
         }
         Contact contactReponse = contactRepo.save(contact);
         return contactMapper.toDto(contactReponse);

@@ -2,7 +2,10 @@ package com.safetrust.interview.contact.models.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import com.safetrust.interview.contact.validator.PhoneNumberConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +26,11 @@ public class ContactDTO implements Serializable {
     private String name;
 
     @NotNull
+    @Email
     private String emailAddress;
 
     @NotNull
+    @PhoneNumberConstraint
     private String telephoneNumber;
 
     @NotNull

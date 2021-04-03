@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -28,13 +29,14 @@ public class Contact implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @NotNull
+    @Email
     @Column(name = "email_address", nullable = false)
     private String emailAddress;
 
