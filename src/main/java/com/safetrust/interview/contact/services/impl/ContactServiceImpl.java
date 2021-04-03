@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException.BadRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.safetrust.interview.contact.exception.ApplicationException;
 import com.safetrust.interview.contact.models.Contact;
